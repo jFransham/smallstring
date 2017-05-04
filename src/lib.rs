@@ -1,4 +1,5 @@
-#![feature(str_mut_extras)]
+#![cfg_attr(feature="as-mut", feature(str_mut_extras))]
+
 extern crate smallvec;
 
 use std::str;
@@ -144,6 +145,7 @@ impl FromIterator<char> for SmallString {
     }
 }
 
+#[cfg(feature="as-mut")]
 impl AsMut<str> for SmallString {
     fn as_mut(&mut self) -> &mut str {
         // We only allow `buffer` to be created from an existing valid string,

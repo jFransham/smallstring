@@ -1,7 +1,14 @@
 [package]
 name = "smallstring"
-version = "0.1.0"
+version = "0.1.2"
 authors = ["Jack Fransham <moonfudgeman@hotmail.co.uk>"]
+repository = "https://github.com/jFransham/smallstring"
+description = "'Small string' optimization: store small strings on the stack using smallvec"
+license = "MIT"
+
+[features]
+default = []
+as-mut = []
 
 [dependencies]
-smallvec = "*"
+smallvec = "0.3"
