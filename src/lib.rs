@@ -79,7 +79,7 @@ impl<B: Array<Item=u8>> Deref for SmallString<B> {
     }
 }
 
-impl AsRef<str> for SmallString {
+impl<B: Array<Item=u8>> AsRef<str> for SmallString<B> {
     fn as_ref(&self) -> &str {
         // We only allow `buffer` to be created from an existing valid string,
         // so this is safe.
@@ -133,7 +133,7 @@ impl<I: Iterator<Item=char>> Iterator for Utf8Iterator<I> {
     }
 }
 
-impl FromIterator<char> for SmallString {
+impl<B: Array<Item=u8>> FromIterator<char> for SmallString<B> {
     fn from_iter<T: IntoIterator<Item=char>>(into_iter: T) -> Self {
         // We're a shell so we mostly work with ASCII data - optimise for this
         // case since we have to optimise for _some_ fixed size of char.
@@ -146,7 +146,7 @@ impl FromIterator<char> for SmallString {
 }
 
 #[cfg(feature="as-mut")]
-impl AsMut<str> for SmallString {
+impl<B: Array<Item=u8>> AsMut<str> for SmallString<B> {
     fn as_mut(&mut self) -> &mut str {
         // We only allow `buffer` to be created from an existing valid string,
         // so this is safe.
@@ -156,14 +156,14 @@ impl AsMut<str> for SmallString {
     }
 }
 
-impl AsRef<OsStr> for SmallString {
+impl<B: Array<Item=u8>> AsRef<OsStr> for SmallString<B> {
     fn as_ref(&self) -> &OsStr {
         let s: &str = self.as_ref();
         s.as_ref()
     }
 }
 
-impl Borrow<str> for SmallString {
+impl<B: Array<Item=u8>> Borrow<str> for SmallString<B> {
     fn borrow(&self) -> &str {
         // We only allow `buffer` to be created from an existing valid string,
         // so this is safe.
@@ -173,16 +173,16 @@ impl Borrow<str> for SmallString {
     }
 }
 
-impl From<String> for SmallString {
-    fn from(s: String) -> SmallString {
+impl<B: Array<Item=u8>> From<String> for SmallString<B> {
+    fn from(s: String) -> SmallString<B> {
         SmallString {
             buffer: SmallVec::from_vec(s.into_bytes()),
         }
     }
 }
 
-impl From<SmallString> for String {
-    fn from(s: SmallString) -> String {
+impl<B: Array<Item=u8>> From<SmallString<B>> for String {
+    fn from(s: SmallString<B>) -> String {
         unsafe {
             String::from_utf8_unchecked(s.buffer.into_vec())
         }
