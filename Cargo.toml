@@ -1,6 +1,6 @@
 [package]
 name = "smallstring"
-version = "0.1.2"
+version = "0.2.0"
 authors = ["Jack Fransham <moonfudgeman@hotmail.co.uk>"]
 repository = "https://github.com/jFransham/smallstring"
 description = "'Small string' optimization: store small strings on the stack using smallvec"
@@ -11,4 +11,4 @@ default = []
 as-mut = []
 
 [dependencies]
-smallvec = "0.3"
+smallvec = "0.6"
