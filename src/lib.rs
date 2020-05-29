@@ -8,7 +8,7 @@ use std::ops::Deref;
 use std::str;
 
 // TODO: FromIterator without having to allocate a String
-#[derive(Clone, Default, PartialEq, Hash, Debug, Eq, PartialOrd)]
+#[derive(Clone, Default, PartialEq, Hash, Debug, Eq, PartialOrd, Ord)]
 pub struct SmallString<B: Array<Item = u8> = [u8; 8]> {
     buffer: SmallVec<B>,
 }
